@@ -1,9 +1,10 @@
-import Image from 'next/image'
+ import Totals from "@/components/Totals";
 
+ 
 export default function Home() {
   return (
-      <div>
-      <h3>Hello</h3>
-      </div>
+      <>
+      <Totals/>
+      </>
   )
 }
