@@ -1,14 +1,18 @@
 "use client"
 import Image from 'next/image';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import * as math from 'mathjs'
+
 import Svg from '../SVGS/svg';
 import "../../Css/styles.css"
+import { AppContext } from '@/context/appContext';
+
 
 const Calculator = () => {
+      const {updateValue, updateSpecialValue, setResult, value, calculateResult} = useContext(AppContext)
+      
 
-
-   const smaller_btn =[
-   ]
+  
 
   return (
     <div className="bg-transparent p-4 ">
@@ -18,7 +22,7 @@ const Calculator = () => {
          <h5 className='text-lightDark  text-[16px] font-normal leading-6 tracking-[-0.24px] '>Numeric unit key mode</h5>
        </div>
         <div className="flex text-center lg:ml-[60px] gap-[5px]">
-          <div className='border-rgbas text-[16px] font-bold cursor-pointer border-[2px] w-[27.814px] h-[27.53px] leading-6 tracking-[-0.24px] rounded-full font-sans text-blued '>
+          <div className='border-rgbas  text-[16px] font-bold cursor-pointer border-[2px] w-[27.814px] h-[27.53px] leading-6 tracking-[-0.24px] rounded-full font-sans text-blued '>
                 K
           </div>
           <div className='border-rgbas border-[2px] cursor-pointer w-[27.814px] h-[27.53px] leading-6 tracking-[-0.24px] rounded-full font-sans text-blued '>
@@ -44,31 +48,31 @@ const Calculator = () => {
       <div className="ml-[55px] px-[10px] gap-2 w-[547px] h-[20rem] font-sans">
        <div className='flex items-center justify-between'>
         <div className="flex text-center">
-          <span className="w-[90px] text-center text-[24px] h-[45px] bg-transparent  text-reds border-[3px] font-normal  rounded-full">
+          <span className="w-[90px] cursor-pointer text-center text-[24px] h-[45px] bg-transparent  text-reds border-[3px] font-normal  rounded-full">
           AC
           </span>        
         </div>    
         <div className="flex items-center gap-2">
         <div className="flex text-center ">
-          <span className="w-[41px] h-[45px] items-center bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">( </span>        
+          <span onClick={()=>updateValue('(')} className="w-[41px] h-[45px] items-center bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">( </span>        
         </div> 
         <div className="flex text-center">
-         <span className="w-[41px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">)</span>        
+         <span onClick={()=>updateValue(')')} className="w-[41px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">)</span>        
         </div>  
        </div>  
        <div className="flex my-[10px] text-center">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateValue('%')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">
          %
          </span>        
         </div>    
         <div className="flex text-center">
          <span className="w-[90px] py-2 h-[45px] items-center flex flex-col bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
          <Svg />
-         <p className='text-[10px]'> delete</p>
+         <p className='text-[10px] cursor-pointer'> delete</p>
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateSpecialValue('÷')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">
          ÷
          </span>        
         </div>      
@@ -76,53 +80,57 @@ const Calculator = () => {
        
        <div className='flex items-center justify-between'>
         <div className="flex my-[10px] text-center">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span
+          onClick={()=>updateValue('7')}
+          className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
           7
           </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span 
+          onClick={()=>updateValue('8')}
+          className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
           8
           </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateValue('9')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
           9
          </span>        
         </div>    
         <div className="flex my-[10px] ">
-         <span className="tracking-[-0.24px] pt-[7px] leading-[19.07px] gap-[6px] w-[90px] flex h-[45px]  items-center bg-transparent border-[3px] text-grayed font-normal text-[14px] rounded-full">
+         <span onClick={()=>updateValue('000000000')} className="tracking-[-0.24px] pt-[7px] cursor-pointer leading-[19.07px] gap-[6px] w-[90px] flex h-[45px]  items-center bg-transparent border-[3px] text-grayed font-normal text-[14px] rounded-full">
          <b className='text-[24px] text-blued ml-[16px] mb-[8px]'>B</b>illion
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">x</span>        
+         <span onClick={()=>updateSpecialValue('x')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">x</span>        
         </div>     
        </div> 
 
        <div className='flex items-center justify-between'>
         <div className="flex my-[10px] text-center">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span onClick={()=>updateValue('4')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
            4
           </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span onClick={()=>updateValue('5')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
            5
           </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateValue('6')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
            6
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span className="tracking-[-0.24px] pt-[7px] text-grayed gap-[4px] w-[90px] h-[45px] text-center text-[14px] items-center bg-transparent border-[3px] blued flex font-normal rounded-full">
+         <span onClick={()=>updateValue('000000')} className=" cursor-pointer tracking-[-0.24px] pt-[7px] text-grayed gap-[4px] w-[90px] h-[45px] text-center text-[14px] items-center bg-transparent border-[3px] blued flex font-normal rounded-full">
          <b className='text-[24px] text-blued  ml-[16px] mb-[10px]'>M</b>illion
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateSpecialValue('-')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">
          －
          </span>        
         </div>              
@@ -130,27 +138,27 @@ const Calculator = () => {
 
        <div className='flex items-center justify-between'>
         <div className="flex my-[10px] text-center">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span onClick={()=>updateValue('1')} className=" cursor-pointer w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
            1
           </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span onClick={()=>updateValue('2')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
           2
           </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateValue('3')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
          3
          </span>        
         </div>    
         <div className="flex my-[10px] text-center  items-center">
-         <span className="tracking-[-0.24px] gap-[6px] pt-[9px] w-[90px] h-[45px] bg-transparent text-center items-center border-[3px] text-grayed flex font-normal text-[10px] rounded-full">
+         <span onClick={()=>updateValue('000')} className="cursor-pointer tracking-[-0.24px] gap-[6px] pt-[9px] w-[90px] h-[45px] bg-transparent text-center items-center border-[3px] text-grayed flex font-normal text-[10px] rounded-full">
           <b className='text-[24px] ml-[16px] mb-[15px] text-blued '>K</b>thousand
          </span>        
         </div>    
         <div className="flex my-[10px] text-center ">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateSpecialValue('+')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">
            +
          </span>        
          </div>  
@@ -158,17 +166,17 @@ const Calculator = () => {
 
        <div className='flex items-center justify-between'>
         <div className="flex my-[10px] text-center ">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span onClick={()=>updateValue('.')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
           .
           </span>        
         </div>    
         <div className="flex my-[10px] text-center ">
-          <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+          <span onClick={()=>updateValue('0')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
             0
           </span>        
         </div>    
         <div className="flex my-[10px] text-center ">
-         <span className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full">
+         <span onClick={()=>updateValue('00')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-lightDark  font-normal text-[24px] rounded-full cursor-pointer">
          00
          </span>        
         </div>    
@@ -177,13 +185,21 @@ const Calculator = () => {
           <div className='flex items-center text-center justify-center'>
           <div className='w-[26px] h-[14px] p-[4px] bg-blued rounded-full'></div>
           <img src="/assests/Vector 33.svg" alt="" />
-          <div className='w-[26px] h-[14px] p-[4px] bg-white bordered rounded-full'></div>
+          <div className='w-[26px] h-[14px] p-[4px] bg-white bordered rounded-full cursor-pointer'></div>
           </div>
            Tab
          </span>        
         </div>    
         <div className="flex my-[10px] text-center items-center justify-center">
-         <span className="w-[90px] h-[45px] bg-transparent  border-[3px] text-reds font-normal leading-[22px] text-[48px] rounded-full">
+         
+         <span onClick={()=>{
+           const newV =value.join("");
+         const newValue = math.evaluate(newV);
+         
+         setResult(newValue);
+         
+         
+         }} className="w-[90px] h-[45px] bg-transparent  border-[3px] text-reds font-normal leading-[22px] text-[48px] rounded-full cursor-pointer">
             =
          </span>        
         </div>    

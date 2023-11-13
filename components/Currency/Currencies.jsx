@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import { FiStar } from 'react-icons/fi'
-import CurrencyData from './CurrencyData'
-import Data from '@/app/CData'
+  import Data from '@/app/CData'
 
 const Currencies = () => {
   return (
