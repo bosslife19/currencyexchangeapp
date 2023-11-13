@@ -104,7 +104,7 @@ const Calculator = () => {
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span onClick={()=>updateSpecialValue('x')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">x</span>        
+         <span onClick={()=>updateSpecialValue('*')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">x</span>        
         </div>     
        </div> 
 
