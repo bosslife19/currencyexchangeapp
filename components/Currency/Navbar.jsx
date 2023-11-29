@@ -13,6 +13,8 @@ const Navbar = () => {
        <select name="names" id="names" className='outline-none '>
        <option value="English"><b className='text-grayed'>EN</b> English</option>
        <option value="japan"><b>JP</b> Japan</option>
+       <option value="japan"><b>HKG</b> Hong Kong</option>
+       <option value="japan"><b>CHN</b> China</option>
        <option value="English"><b>EN</b> English</option>
        </select>
        
