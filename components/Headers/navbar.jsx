@@ -1,17 +1,25 @@
 "use client"
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {MdOutlineKeyboardArrowDown} from "react-icons/md"
  import "../../Css/styles.css"
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 
 import { AppContext } from '@/context/appContext'
 import Image from 'next/image'
-const Navbar = ({displayColor}) => {
+const Navbar = ({displayColor, calculateToEuro}) => {
   
   const [selectedHeader, setSelectedHeader] = useState('Calculation');
   const {value, result} = useContext(AppContext)
   const [content, setContent] = useState('')  
+ useEffect(()=>{
+  const calc = async ()=>{
+    const results = await calculateToEuro()
+    console.log(results);
+  }
 
+  calc();
+  
+ },[result])
   const handleHeaderClick = (header) => {
     setSelectedHeader(header);
     // Reset content when changing sections
@@ -84,9 +92,15 @@ const Navbar = ({displayColor}) => {
         </div>
       )}
       {selectedHeader === 'Exchange' && (
+       
         <div className='mt-[16rem] w-full'>
+           {/* {calculateToEuro(result)} */}
           <div className='bg-[#fce8c9]'>
           <div className="flex bg-[#fffbeb] justify-between fonts_famly items-center w-[572px] h-[57px] rounded-roundin p-padd-20">
+          <div className='fonts_famly'>
+          <div className="value w-[486px] h-[247px] flex-wrap text-[32px] leading-[43.58px] text-grayed tracking-[-1.5%] items-end font-normal">{value? value : ''}</div>
+          {/* <div className="result flex justify-end items-end text-blued font-semibold text-[24px] leading-[32.69px] tracking-[-5%] ">{result? result : ''}</div> */}
+          </div>
           <div className="flex text-blued">
            <h4 className='font-bold text-[20px] leading-[34.05px] tracking-[-1.5%]'>USD</h4>
            <MdOutlineKeyboardArrowDown className="text-blued font-bold text-[30px] leading-[34.05px] tracking-[-1.5%]"/>
@@ -100,7 +114,7 @@ const Navbar = ({displayColor}) => {
          <div className="bg-[#fddaa1]">
          <div className="flex bg-[#fce8c9] justify-between fonts_famly items-center   h-[57px] p-padd-20 rounded-roundin">
          <div className="flex text-blued">
-          <h4 className='font-bold text-[20px] leading-[34.05px] tracking-[-1.5%]'>USD</h4>
+          <h4 className='font-bold text-[20px] leading-[34.05px] tracking-[-1.5%]'>EUR</h4>
           <MdOutlineKeyboardArrowDown className="text-blued font-bold text-[30px] leading-[34.05px] tracking-[-1.5%]"/>
         </div>
         <div className="text-blued flex gap-[10px] ">
@@ -113,7 +127,7 @@ const Navbar = ({displayColor}) => {
          <div className="bg-[#fffbeb] rounded-roundin">
          <div className="flex bg-[#fddaa1] justify-between fonts_famly items-center  h-[57px] rounded-roundin p-padd-20">
          <div className="flex text-blued">
-          <h4 className='font-bold text-[20px] leading-[34.05px] tracking-[-1.5%]'>USD</h4>
+          <h4 className='font-bold text-[20px] leading-[34.05px] tracking-[-1.5%]'>CNY</h4>
           <MdOutlineKeyboardArrowDown className="text-blued font-bold text-[30px] leading-[34.05px] tracking-[-1.5%]"/>
         </div>
         <div className="text-blued flex gap-[10px] ">

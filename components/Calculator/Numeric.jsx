@@ -9,7 +9,7 @@ import { AppContext } from '@/context/appContext';
 
 
 const Calculator = () => {
-      const {updateValue, updateSpecialValue, setResult, value, calculateResult} = useContext(AppContext)
+      const {updateValue, updateSpecialValue, setResult, value, setValue} = useContext(AppContext)
       
 
   
@@ -48,7 +48,11 @@ const Calculator = () => {
       <div className="ml-[55px] px-[10px] gap-2 w-[547px] h-[20rem] font-sans">
        <div className='flex items-center justify-between'>
         <div className="flex text-center">
-          <span className="w-[90px] cursor-pointer text-center text-[24px] h-[45px] bg-transparent  text-reds border-[3px] font-normal  rounded-full">
+          <span onClick={()=>{
+            setValue('');
+            updateValue('');
+            setResult('');
+          }} className="w-[90px] cursor-pointer text-center text-[24px] h-[45px] bg-transparent  text-reds border-[3px] font-normal  rounded-full">
           AC
           </span>        
         </div>    
