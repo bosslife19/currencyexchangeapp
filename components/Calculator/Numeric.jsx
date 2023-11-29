@@ -9,7 +9,7 @@ import { AppContext } from '@/context/appContext';
 
 
 const Calculator = () => {
-      const {updateValue, updateSpecialValue, setResult, value, setValue} = useContext(AppContext)
+      const {updateValue, updateSpecialValue, setResult, value, setValue, deleteValue} = useContext(AppContext)
       
 
   
@@ -70,7 +70,7 @@ const Calculator = () => {
          </span>        
         </div>    
         <div className="flex text-center">
-         <span className="w-[90px] py-2 h-[45px] items-center flex flex-col bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
+         <span onClick={()=>deleteValue()} className="w-[90px] py-2 h-[45px] items-center flex flex-col bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
          <Svg />
          <p className='text-[10px] cursor-pointer'> delete</p>
          </span>        
