@@ -52,7 +52,16 @@ const Navbar = ({displayColor, calculateToEuro}) => {
      </button>
      <div className="">
      <button
-     onClick={() => handleHeaderClick('clickHere')}
+     onClick={() => {
+      if(selectedHeader ==='clickHere'){
+        setSelectedHeader('Calculation')
+        setContent("")
+      } else{
+        setSelectedHeader('clickHere');
+        setContent('');
+      }
+      // handleHeaderClick('clickHere')
+     }}
      className={`${
       selectedHeader === 'clickHere' ? 'text-yellowed font-semibold' : 'text-yellowed font-normal'
      } w-[122px] h-[30px] rounded-[100px] p-[4px] items-center text-center text-[20px] leading-[24px] tracking-[-1.5%]`}>
