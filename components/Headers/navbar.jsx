@@ -1,16 +1,18 @@
 "use client"
 import React, { useContext, useEffect, useState } from 'react'
+
 import {MdOutlineKeyboardArrowDown} from "react-icons/md"
  import "../../Css/styles.css"
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 
 import { AppContext } from '@/context/appContext'
 import Image from 'next/image'
-const Navbar = ({displayColor, calculateToEuro}) => {
+const Navbar = ({displayColor, calculateToEuro, calculation, clickhere, exchange, k, m, b}) => {
   
   const [selectedHeader, setSelectedHeader] = useState('Calculation');
   const {value, result} = useContext(AppContext)
   const [content, setContent] = useState('')  
+  
  useEffect(()=>{
   const calc = async ()=>{
     const results = await calculateToEuro()
@@ -41,14 +43,14 @@ const Navbar = ({displayColor, calculateToEuro}) => {
        className={`${
         selectedHeader === 'Calculation' ? 'text-blued font-semibold' : 'text-grayed font-normal'
        } w-[122px] h-[30px] rounded-[100px] p-[4px] items-center text-center text-[20px] font-sans leading-[24px] tracking-[-1.5%]`}>
-       Calculation
+       {calculation}
      </button>
      <button
        onClick={() => handleHeaderClick('Exchange')}
        className={`${
         selectedHeader === 'Exchange' ? 'text-blued font-semibold' : 'text-grayed font-normal'
        } w-[122px] h-[30px] rounded-[100px] p-[4px] items-center text-center text-[20px] leading-[24px] tracking-[-1.5%]`}>
-      Exchange
+      {exchange}
      </button>
      <div className="">
      <button
@@ -65,7 +67,7 @@ const Navbar = ({displayColor, calculateToEuro}) => {
      className={`${
       selectedHeader === 'clickHere' ? 'text-yellowed font-semibold' : 'text-yellowed font-normal'
      } w-[122px] h-[30px] rounded-[100px] p-[4px] items-center text-center text-[20px] leading-[24px] tracking-[-1.5%]`}>
-     ClickHere
+     {clickhere}
    </button>
   
     <div className=' w-[50px] h-[40px] bg-yellowed relative border rounded-[4px] border-yellowed ml-[50px]'>
@@ -86,7 +88,7 @@ const Navbar = ({displayColor, calculateToEuro}) => {
     <br/>
      <div className="flex gap-[62px] items-center mt-[-30px] mb-[5px]">
        <span className='bg-[#0369A1] text-[#fff] w-[122px] h-[30px] rounded-[100px] p-[4px] items-center text-center'>000</span>
-       <span className='text-[#667080] fonts_famly text-[20px] font-normal leading-[27.24px] items-center tracking-[-1.5%]'>KMB</span>
+        <span className='text-[#667080] fonts_famly text-[20px] font-normal leading-[27.24px] items-center tracking-[-1.5%]'>{k}{m}{b}</span>
        <span className='text-[#8ea1c0] fonts_famly text-[20px] font-normal leading-[27.24px] items-center text-center flex tracking-[-1.5%]'>万亿兆</span>
        
      </div>

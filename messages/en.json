@@ -1,0 +1,29 @@
+{
+    "Top": {
+      "calculation": "Calcuation",
+      "exchange": "Exchange",
+      "clickhere": "Clickhere",
+      "currency": "currency",
+      "crypto": "crypto",
+      "favorites": "favorites",
+      "nation": "Nation",
+      "rate": "Rate",
+      "change": "Change",
+      "login": "log in"
+    },
+    "Bottom": {
+      "bottomText": "Numeric unit key mode",
+      "ac": "AC",
+      "k": "K",
+      "m": "M",
+      "b": "B",
+      "delete": "delete",
+      "illion": "illion",
+      "thousand": "thousand",
+      "tab": "Tab",
+      "w": "w",
+      "y": "y",
+      "z": "z"
+
+    }
+  }

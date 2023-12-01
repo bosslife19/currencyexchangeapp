@@ -1,0 +1,28 @@
+{
+    "Top": {
+        "calculation": "计算",
+        "exchange": "交换",
+        "clickhere": "点击这里",
+        "currency": "货币",
+        "crypto": "加密货币",
+        "favorites": "收藏夹",
+        "nation": "国家",
+        "rate": "汇率",
+        "change": "变化",
+        "login": "登录"
+      },
+      "Bottom":{
+        "bottomText": "数字单位键模式",
+        "ac": "清零",
+        "k": "千",
+        "m": "百万",
+        "b": "十亿",
+        "delete": "删除",
+        "illion": "亿",
+        "thousand": "千",
+        "tab": "制表符",
+        "w": "w",
+        "y": "y",
+        "z": "z"
+      }
+  }

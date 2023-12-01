@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image';
 import { useContext, useState } from 'react';
+import Link from 'next/link';
 import * as math from 'mathjs'
 
 import Svg from '../SVGS/svg';
@@ -8,7 +9,7 @@ import "../../Css/styles.css"
 import { AppContext } from '@/context/appContext';
 
 
-const Calculator = () => {
+const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
       const {updateValue, updateSpecialValue, setResult, value, setValue, deleteValue} = useContext(AppContext)
       
 
@@ -19,20 +20,20 @@ const Calculator = () => {
       <div className="flex justify-between my-[10px] w-[507px] ml-[150px]">
        <div className="flex font-sans justify-between gap-[30px] items-center">
         <div>
-         <h5 className='text-lightDark  text-[16px] font-normal leading-6 tracking-[-0.24px] '>Numeric unit key mode</h5>
+         <h5 className='text-lightDark  text-[16px] font-normal leading-6 tracking-[-0.24px] '>{bottomText}</h5>
        </div>
-        <div className="flex text-center lg:ml-[60px] gap-[5px]">
+        <Link className="flex text-center lg:ml-[60px] gap-[5px]" href='/en'>
           <div className='border-rgbas  text-[16px] font-bold cursor-pointer border-[2px] w-[27.814px] h-[27.53px] leading-6 tracking-[-0.24px] rounded-full font-sans text-blued '>
-                K
+                {k}
           </div>
           <div className='border-rgbas border-[2px] cursor-pointer w-[27.814px] h-[27.53px] leading-6 tracking-[-0.24px] rounded-full font-sans text-blued '>
-                M
+                {m}
           </div>
           <div className='border-rgbas border-[2px] cursor-pointer w-[27.814px] h-[27.53px] leading-6 tracking-[-0.24px] rounded-full font-sans text-blued '>
-                B
+                {b}
           </div>
-        </div>
-        <div className="flex text-center gap-[3px]">
+        </Link>
+        <Link className="flex text-center gap-[3px]" href='/zh'>
           <div className='border-hastTag border-[2px] cursor-pointer text-[14px] leading w-[24px] h-[24px] rounded-full tracking-[-0.24px] font-bold font-sans text-hastTag'>
                 w
           </div>
@@ -42,7 +43,7 @@ const Calculator = () => {
           <div className='border-hastTag border-[2px] text-[14px] leading cursor-pointer w-[24px] h-[24px] rounded-full tracking-[-0.24px] font-bold font-sans text-hastTag'>
                 z
           </div>
-        </div>
+        </Link>
       </div>
     </div>
       <div className="ml-[55px] px-[10px] gap-2 w-[547px] h-[20rem] font-sans">
@@ -53,7 +54,7 @@ const Calculator = () => {
             updateValue('');
             setResult('');
           }} className="w-[90px] cursor-pointer text-center text-[24px] h-[45px] bg-transparent  text-reds border-[3px] font-normal  rounded-full">
-          AC
+          {ac}
           </span>        
         </div>    
         <div className="flex items-center gap-2">
@@ -72,7 +73,7 @@ const Calculator = () => {
         <div className="flex text-center">
          <span onClick={()=>deleteValue()} className="w-[90px] py-2 h-[45px] items-center flex flex-col bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full">
          <Svg />
-         <p className='text-[10px] cursor-pointer'> delete</p>
+         <p className='text-[10px] cursor-pointer'>{deleted}</p>
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
@@ -104,7 +105,7 @@ const Calculator = () => {
         </div>    
         <div className="flex my-[10px] ">
          <span onClick={()=>updateValue('000000000')} className="tracking-[-0.24px] pt-[7px] cursor-pointer leading-[19.07px] gap-[6px] w-[90px] flex h-[45px]  items-center bg-transparent border-[3px] text-grayed font-normal text-[14px] rounded-full">
-         <b className='text-[24px] text-blued ml-[16px] mb-[8px]'>B</b>illion
+         <b className='text-[24px] text-blued ml-[16px] mb-[8px]'>{b}</b>{illion}
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
@@ -130,7 +131,7 @@ const Calculator = () => {
         </div>    
         <div className="flex my-[10px] text-center">
          <span onClick={()=>updateValue('000000')} className=" cursor-pointer tracking-[-0.24px] pt-[7px] text-grayed gap-[4px] w-[90px] h-[45px] text-center text-[14px] items-center bg-transparent border-[3px] blued flex font-normal rounded-full">
-         <b className='text-[24px] text-blued  ml-[16px] mb-[10px]'>M</b>illion
+         <b className='text-[24px] text-blued  ml-[16px] mb-[10px]'>{m}</b>{illion}
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
@@ -158,7 +159,7 @@ const Calculator = () => {
         </div>    
         <div className="flex my-[10px] text-center  items-center">
          <span onClick={()=>updateValue('000')} className="cursor-pointer tracking-[-0.24px] gap-[6px] pt-[9px] w-[90px] h-[45px] bg-transparent text-center items-center border-[3px] text-grayed flex font-normal text-[10px] rounded-full">
-          <b className='text-[24px] ml-[16px] mb-[15px] text-blued '>K</b>thousand
+          <b className='text-[24px] ml-[16px] mb-[15px] text-blued '>{m}</b>{thousand}
          </span>        
         </div>    
         <div className="flex my-[10px] text-center ">
@@ -191,7 +192,7 @@ const Calculator = () => {
           <img src="/assests/Vector 33.svg" alt="" />
           <div className='w-[26px] h-[14px] p-[4px] bg-white bordered rounded-full cursor-pointer'></div>
           </div>
-           Tab
+           {tab}
          </span>        
         </div>    
         <div className="flex my-[10px] text-center items-center justify-center">

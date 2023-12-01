@@ -4,8 +4,7 @@ import Head from './Headers/Head'
 import CurrencyTotal from './Currency/CurrencyTotal'
 
 const Totals = () => {
-  const arr = [1, 3, 4]
-  console.log(arr);
+  
   return (
     <>
      <div className="flex">

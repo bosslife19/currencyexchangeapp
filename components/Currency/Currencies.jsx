@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-  import Data from '@/app/CData'
+  import Data from '@/app/[locale]/CData'
 
 
   async function getData(){
