@@ -11,7 +11,22 @@ import { AppContext } from '@/context/appContext';
 
 const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
       const {updateValue, updateSpecialValue, setResult, value, setValue, deleteValue} = useContext(AppContext)
+      function convertAbbreviations(inputString) {
+        const replacements = {
+          'k': 'e3',  // 'k' represents thousand
+          'm': 'e6',  // 'm' represents million
+          'b': 'e9' ,  // 'b' represents billion
+          'x': '*',
+        };
       
+        // Create a regular expression to match 'k', 'm', and 'b' globally
+        const regex = /[kmbx]/gi;
+      
+        // Use the replace method to replace occurrences with their corresponding values
+        const modifiedString = inputString.replace(regex, match => replacements[match.toLowerCase()]);
+      
+        return modifiedString;
+      }
 
   
 
@@ -104,12 +119,12 @@ const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
          </span>        
         </div>    
         <div className="flex my-[10px] ">
-         <span onClick={()=>updateValue('000000000')} className="tracking-[-0.24px] pt-[7px] cursor-pointer leading-[19.07px] gap-[6px] w-[90px] flex h-[45px]  items-center bg-transparent border-[3px] text-grayed font-normal text-[14px] rounded-full">
+         <span onClick={()=>updateValue('B')} className="tracking-[-0.24px] pt-[7px] cursor-pointer leading-[19.07px] gap-[6px] w-[90px] flex h-[45px]  items-center bg-transparent border-[3px] text-grayed font-normal text-[14px] rounded-full">
          <b className='text-[24px] text-blued ml-[16px] mb-[8px]'>{b}</b>{illion}
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span onClick={()=>updateSpecialValue('*')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">x</span>        
+         <span onClick={()=>updateSpecialValue('X')} className="w-[90px] h-[45px] bg-transparent border-[3px] text-blued font-normal text-[24px] rounded-full cursor-pointer">x</span>        
         </div>     
        </div> 
 
@@ -130,7 +145,7 @@ const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
          </span>        
         </div>    
         <div className="flex my-[10px] text-center">
-         <span onClick={()=>updateValue('000000')} className=" cursor-pointer tracking-[-0.24px] pt-[7px] text-grayed gap-[4px] w-[90px] h-[45px] text-center text-[14px] items-center bg-transparent border-[3px] blued flex font-normal rounded-full">
+         <span onClick={()=>updateValue('M')} className=" cursor-pointer tracking-[-0.24px] pt-[7px] text-grayed gap-[4px] w-[90px] h-[45px] text-center text-[14px] items-center bg-transparent border-[3px] blued flex font-normal rounded-full">
          <b className='text-[24px] text-blued  ml-[16px] mb-[10px]'>{m}</b>{illion}
          </span>        
         </div>    
@@ -158,8 +173,8 @@ const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
          </span>        
         </div>    
         <div className="flex my-[10px] text-center  items-center">
-         <span onClick={()=>updateValue('000')} className="cursor-pointer tracking-[-0.24px] gap-[6px] pt-[9px] w-[90px] h-[45px] bg-transparent text-center items-center border-[3px] text-grayed flex font-normal text-[10px] rounded-full">
-          <b className='text-[24px] ml-[16px] mb-[15px] text-blued '>{m}</b>{thousand}
+         <span onClick={()=>updateValue('K')} className="cursor-pointer tracking-[-0.24px] gap-[6px] pt-[9px] w-[90px] h-[45px] bg-transparent text-center items-center border-[3px] text-grayed flex font-normal text-[10px] rounded-full">
+          <b className='text-[24px] ml-[16px] mb-[15px] text-blued '>{k}</b>{thousand}
          </span>        
         </div>    
         <div className="flex my-[10px] text-center ">
@@ -198,8 +213,14 @@ const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
         <div className="flex my-[10px] text-center items-center justify-center">
          
          <span onClick={()=>{
+          
            const newV =value.join("");
-         const newValue = math.evaluate(newV);
+           console.log(newV);
+           console.log(typeof(newV));
+           
+           const sanitizedValue = convertAbbreviations(newV);
+          console.log(sanitizedValue);
+         const newValue = math.evaluate(sanitizedValue);
          
          setResult(newValue);
          
