@@ -12,21 +12,29 @@ import { AppContext } from '@/context/appContext';
 const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
       const {updateValue, updateSpecialValue, setResult, value, setValue, deleteValue} = useContext(AppContext)
       function convertAbbreviations(inputString) {
-        const replacements = {
-          'k': 'e3',  // 'k' represents thousand
-          'm': 'e6',  // 'm' represents million
-          'b': 'e9' ,  // 'b' represents billion
-          'x': '*',
-        };
-      
-        // Create a regular expression to match 'k', 'm', and 'b' globally
-        const regex = /[kmbx]/gi;
-      
-        // Use the replace method to replace occurrences with their corresponding values
-        const modifiedString = inputString.replace(regex, match => replacements[match.toLowerCase()]);
-      
-        return modifiedString;
-      }
+  // Create a regular expression to match 'k', 'm', and 'b' with optional numbers before them
+  const regex = /(\d*\.?\d+)?([kmb])/gi;
+
+  // Use the replace method to replace occurrences with their corresponding values
+  const modifiedString = inputString.replace(regex, (match, number, abbreviation) => {
+    const numericValue = parseFloat(number) || 1; // Default to 1 if no numeric value provided
+    const multiplier = {
+      'k': 1e3,
+      'm': 1e6,
+      'b': 1e9,
+    }[abbreviation.toLowerCase()];
+
+    if (multiplier) {
+      return (numericValue * multiplier).toString();
+    }
+   const newMatch = match.replace(/x/gi, '*');
+    return newMatch; // Return the original match if not a valid replacement
+  });
+
+  const newModified = modifiedString.replace(/x/gi, '*');
+
+  return newModified;
+}
 
   
 
