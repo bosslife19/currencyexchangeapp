@@ -43,7 +43,7 @@ const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
       <div className="flex justify-between my-[10px] w-[507px] ml-[150px]">
        <div className="flex font-sans justify-between gap-[30px] items-center">
         <div>
-         <h5 className='text-lightDark  text-[16px] font-normal leading-6 tracking-[-0.24px] '>{bottomText}</h5>
+         <h5 className='text-lightDark text-[16px] font-normal leading-6 tracking-[-0.24px] '>{bottomText}</h5>
        </div>
         <Link className="flex text-center lg:ml-[60px] gap-[5px]" href='/en'>
           <div className='border-rgbas  text-[16px] font-bold cursor-pointer border-[2px] w-[27.814px] h-[27.53px] leading-6 tracking-[-0.24px] rounded-full font-sans text-blued '>
@@ -218,7 +218,7 @@ const Calculator = ({bottomText,k,m,b,deleted,illion,thousand,tab,ac}) => {
            {tab}
          </span>        
         </div>    
-        <div className="flex my-[10px] text-center items-center justify-center">
+        <div className="flex my-[11px] text-center items-center justify-center">
          
          <span onClick={()=>{
           
